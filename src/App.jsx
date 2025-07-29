@@ -65,10 +65,34 @@ function App() {
     setGameStage(stages[1].name)
   }
 
-  // process the tetter input
+  // process the letter input
   const verifyLetter =(letter) => {
-    console.log(letter)
+    const nomalizedLetter = letter.toLowerCase()
+
+    // check if letter has already been utilized
+    if (guessedLetters.includes(nomalizedLetter) || 
+        wrongLetters.includes(nomalizedLetter)) {
+      return
+    }
+
+    // push guessed letter or remove a guess
+    if (letters.includes(nomalizedLetter)) {
+      setGuessedLetters((actualGuessedLetters) => [
+        ...actualGuessedLetters,
+        nomalizedLetter
+      ])
+    }
+
+    else {
+      setWrongLetters((actualWrongLetters) => [
+        ...actualWrongLetters,
+        nomalizedLetter
+      ])
+    }
   }
+
+  console.log(guessedLetters)
+  console.log(wrongLetters)
 
   // restarts the game
   const retry = () => {
